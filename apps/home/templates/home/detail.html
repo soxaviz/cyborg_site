@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}
+detail
+{% endblock %}
+
+
+{% block content %}
+<!-- ***** Featured Start ***** -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="feature-banner header-text">
+            <div class="row">
+                <div class="col-lg-4">
+                    {% if game.preview %}
+                    <img src="{{ game.preview.url }}" alt=""
+                         style="border-radius: 23px;">
+                    {% endif %}
+                </div>
+                <div class="col-lg-8">
+                    <div class="thumb">
+                        {% if game.preview %}
+                        <img src="{{ game.preview.url }}" alt=""
+                             style="border-radius: 23px;">
+                        {% endif %}
+                        <a href="{{ game.trailer }}" target="_blank"><i class="fa fa-play"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Featured End ***** -->
+
+<!-- ***** Details Start ***** -->
+<div class="game-details">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{ game.name }} Details</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="left-info">
+                            <div class="left">
+                                <h4>{{ game.name }}</h4>
+                                <span>{{ game.sub_genre }}</span>
+                            </div>
+                            <ul>
+                                <li><i class="fa fa-star"></i> 4.8</li>
+                                <li><i class="fa fa-download"></i> {{ game.downloads }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="right-info">
+                            <ul>
+                                <li><i class="fa fa-star"></i> 4.8</li>
+                                <li><i class="fa fa-download"></i> {{ game.downloads }}</li>
+                                <li><i class="fa fa-server"></i> {{ game.size }}GB</li>
+                                <li><i class="fa fa-gamepad"></i> {{ game.genre }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/details-01.jpg" alt=""
+                             style="border-radius: 23px; margin-bottom: 30px;">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/details-02.jpg" alt=""
+                             style="border-radius: 23px; margin-bottom: 30px;">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/details-03.jpg" alt=""
+                             style="border-radius: 23px; margin-bottom: 30px;">
+                    </div>
+                    <div class="col-lg-12">
+                        <p>{{ game.description }}</p>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="col-lg-12">
+                        <div class="main-border-button">
+                            <a href="{% url 'add_to_library' game.id request.user.id %}">Add
+                                <em style="text-decoration: underline">{{ game.name }}</em>
+                                to library
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Details End ***** -->
+
+<!-- ***** Other Start ***** -->
+<div class="other-games">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Other Related</em> Games</h4>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="item">
+                <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
+                <h4>Dota 2</h4><span>Sandbox</span>
+                <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2.3M</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Other End ***** -->
+{% endblock %}

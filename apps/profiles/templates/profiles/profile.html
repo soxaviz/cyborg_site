@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}
+profile
+{% endblock %}
+
+
+{% block content %}
+<!-- ***** Banner Start ***** -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-profile ">
+            <div class="row">
+                <div class="col-lg-4">
+                    {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="" style="border-radius: 23px;">
+                    {% endif %}
+                </div>
+                <div class="col-lg-4 align-self-center">
+                    <div class="main-info header-text">
+                        <span>Offline</span>
+                        <h4>{{ request.user.username }}</h4>
+                        <p>{{ request.user.profile.about }}</p>
+                        <div class="main-border-button">
+                            <a href="{% url 'stream_create' %}">Start Live Stream</a>
+                            <a href="{% url 'create_clip' %}">Create clip</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 align-self-center">
+                    <div>
+                        <a href="{% url 'edit' request.user.profile.pk %}" class="btn text-light" style="background-color: #e75e8d">edit</a>
+                        <a href="{% url 'logout' %}" class="btn text-light border-white">logout</a>
+                    </div>
+                    <ul>
+                        <li>Games Downloaded <span>{{ request.user.profile.downloads_qty }}</span></li>
+                        <li>Friends Online <span>16</span></li>
+                        <li>Live Streams <span>{{ request.user.streams.count }}</span></li>
+                        <li>Clips <span>{{ request.user.clips.count }}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="clips">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="heading-section">
+                                    <h4><em>Your Most Popular</em> Clips</h4>
+                                </div>
+                            </div>
+                            {% for clip in request.user.clips.all %}
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="item">
+                                    <div class="thumb">
+                                        {% if clip.preview %}
+                                        <img src="{{ clip.preview.url }}" alt="" style="border-radius: 23px;">
+                                        {% endif %}
+                                        <a href="{{ clip.url }}" target="_blank"><i
+                                                class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="down-content">
+                                        <h4>{{ clip.name }}</h4>
+                                        <span><i class="fa fa-eye"></i> {{ clip.views }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="col-lg-12">
+                                <div class="main-button">
+                                    <a href="#">Load More Clips</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Banner End ***** -->
+
+<!-- ***** Gaming Library Start ***** -->
+<div class="gaming-library profile-library">
+    <div class="col-lg-12">
+        <div class="heading-section">
+            <h4><em>Your Gaming</em> Library</h4>
+        </div>
+        {{ request.user.library.first.library_items.all }}
+        {% for item in request.user.library.first.library_items.all %}
+        <div class="item">
+            <ul>
+                {% if item.game.preview %}
+                <li>
+                    <img src="{{ item.game.preview.url }}" alt=""
+                         class="templatemo-item"></li>
+                {% endif %}
+                <li><h4>{{ item.game.name }}</h4><span>{{ item.game.sub_genre }}</span></li>
+                <li><h4>Date Added</h4><span>{{ item.created_at|date:'d/m/Y' }}</span></li>
+                <li><h4>Currently</h4>
+                    {% if item.is_downloaded %}
+                    <span>Downloaded</span>
+                    {% else %}
+                    <span>not Downloaded</span>
+                    {% endif %}
+                </li>
+                <li>
+                    <div
+                            class="main-border-button {% if not item.is_downloaded %} border-no-active {% endif %}
+
+                        ">
+                        {% if not item.is_downloaded %}
+                        <a href="{% url 'download' item.id %}">Download</a>
+                        {% else %}
+                        <a href="{% url 'download' item.id %}">Remove</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- ***** Gaming Library End ***** -->
+{% endblock %}
